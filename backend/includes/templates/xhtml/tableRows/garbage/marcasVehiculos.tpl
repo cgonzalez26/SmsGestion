@@ -1,0 +1,1 @@
+<td style='font-weight: bold; width: 250px' class='left'> {TEXT} </td> <td class='img'> <a href='tablas/modelosVehiculos?idMarcaVehiculo={KEY}'><img src='images/zoom.gif' /></a> </td>

@@ -1,0 +1,107 @@
+body { 
+	font-size: 11px; 
+	font-family:Verdana;
+	background: #FFFFFF;
+	margin: 0; 
+	padding: 0;
+	text-align:center;
+}
+
+/*a { font-family:Tahoma;font-size:12px;underline:none; color: #336699; }
+a:hover { color: #FFBB00; }
+a:visited { color: #336699; }*/
+
+img { border: 0; }
+
+div#BODY { width:798px; margin:auto;background:#FFFFFF}
+
+div#BODY div.cabecera { height:120px;}
+div#BODY div.cabeceraInternal { height:105px;}
+
+div#BODY div.botonera { height:39px;}
+div#BODY div.botoneraInternal { height:18px;}
+div#BODY div.cuerpo {  height:285px;}
+div#BODY div.contenido {  padding:10px 10px 10px 10px;}
+div#BODY div.footPage { height:75px;}
+div.foot { font-family:Verdana;font-size:10px;color:#FFFFFF; text-decoration:none}
+
+a.linkFooter { font-family:Verdana;font-size:10px;color:#FFFFFF; text-decoration:none }
+a.linkFooter:hover { font-family:Verdana;font-size:10px;color:#000000; text-decoration:none}
+/*a.linkFooter:visited { font-family:Verdana;font-size:10px;color:#000000;text-decoration:none }*/
+
+
+a.linkLogout { font-family:Verdana;font-size:9px;color:#000;text-decoration:none }
+a.linkLogout:hover { font-family:Verdana;font-size:9px;color:#000;text-decoration:none }
+a.linkLogout:visited { font-family:Verdana;font-size:9px;color:#000;text-decoration:none }
+
+
+a.linkFacebook { font-family:Verdana;font-size:9px;color:#6D6D6D;text-decoration:none; }
+a.linkFacebook:hover { font-family:Verdana;font-size:9px;color:#6D6D6D;text-decoration:none }
+a.linkFacebook:visited { font-family:Verdana;font-size:9px;color:#6D6D6D;text-decoration:none }
+
+a.linkVenta { font-family:Verdana;font-size:11px;color:#504f4e; text-decoration:none }
+a.linkVenta:hover { font-family:Verdana;font-size:11px;color:#504f4e; text-decoration:none}
+a.linkVenta:visited { font-family:Verdana;font-size:11px;color:#504f4e;text-decoration:none }
+
+a.linkSitio { font-family:Verdana;font-size:11px;color:#000;text-decoration:none;font-weight:bold; }
+a.linkSitio:hover { font-family:Verdana;font-size:11px;color:#000;text-decoration:none;font-weight:bold; }
+a.linkSitio:visited { font-family:Verdana;font-size:11px;color:#000;text-decoration:none;font-weight:bold; }
+
+.linkPag1{font-family:Verdana;font-size:11px;color:#F22627;text-decoration:none;font-weight:bold;}
+.linkPag2{font-family:Verdana;font-size:11px;color:#C1C1C1;text-decoration:none;font-weight:bold;}
+
+a.linkPag2{font-family:Verdana;font-size:11px;color:#C1C1C1;text-decoration:none;font-weight:bold;}
+a.linkPag2:hover{font-family:Verdana;font-size:11px;color:#C1C1C1;text-decoration:none;font-weight:bold;}
+a.linkPag2:visited{font-family:Verdana;font-size:11px;color:#C1C1C1;text-decoration:none;font-weight:bold}
+a.linkPag3{font-family:Verdana;font-size:11px;color:#000;text-decoration:none;font-weight:bold;}
+a.linkPag3:hover{font-family:Verdana;font-size:11px;color:#000;text-decoration:none;font-weight:bold;}
+a.linkPag3:visited{font-family:Verdana;font-size:11px;color:#000;text-decoration:none;font-weight:bold}
+
+.content{
+	font-family:Verdana;
+	font-size:10px;
+    color:#00000;
+}
+.contentBordo{
+	font-family:Verdana;
+	font-size:11px;
+    color:#ca2125;
+}
+
+.txtLogin{
+	width:155px;
+	height:16px;
+	border:1px solid #000000;
+}
+
+/*************** Backend **************/
+
+table.TablePermits{
+	font-family:Verdana;
+	font-size:11px;
+	text-align:left;
+	/*background:#F5F5F5;*/
+}
+
+table.TablePermits td.title{	
+	font-size:18px;	
+}
+
+
+table.TablePermits input.text{	
+	background:#FFF;
+	border-bottom:1px solid #CCC;
+	border-right:1px solid #CCC;
+	border-top:1px solid #FFF;
+	border-left:1px solid #FFF;	
+	padding-top:3px;
+	padding-left:3px;
+	height:25px;
+	
+}
+
+.tdDetalleVehiculo{
+	background:#D9D9D9;
+	font-weight:bold;
+}
+

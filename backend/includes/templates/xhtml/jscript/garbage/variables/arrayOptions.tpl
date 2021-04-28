@@ -1,0 +1,1 @@
+[ <!-- ARRAY _SELF_ SEPARATOR ',' --> new Option( "{TEXT}", "{VALUE}" ) <!-- END --> ]
