@@ -10,7 +10,7 @@
 
 	$oXajax = new xajax();
 	
-	$oXajax->setCharEncoding('ISO-8859-1');
+	//$oXajax->setCharEncoding('ISO-8859-1');
 	$oXajax->configure('decodeUTF8Input',true);
 
 	$oXajax->register( XAJAX_FUNCTION , 'getDatosTiposUsuarios');

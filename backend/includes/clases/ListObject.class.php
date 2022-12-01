@@ -1,4 +1,4 @@
-<?
+<?php
 
 final class ListObject {	
 	
@@ -172,7 +172,7 @@ final class ListObject {
 				$arrayHREF['p'] = $actualPage - 1;
 				$href = $url . '?' . http_build_query( $arrayHREF );
 						
-				$pagging['BACK'] = "<a href='$href' class='anterior'>« Anterior</a>";
+				$pagging['BACK'] = "<a href='$href' class='anterior'>ï¿½ Anterior</a>";
 			}
 			
 			if($actualPage < $pagging['NUM_PAGES'] - 1) {
@@ -180,7 +180,7 @@ final class ListObject {
 				$arrayHREF['p'] = $actualPage + 1;
 				$href = $url . '?' . http_build_query( $arrayHREF );
 			
-				$pagging['NEXT'] = "<a href='$href' class='siguiente'>Siguiente »</a>";
+				$pagging['NEXT'] = "<a href='$href' class='siguiente'>Siguiente ï¿½</a>";
 			}
 		}
 	

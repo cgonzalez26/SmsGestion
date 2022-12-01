@@ -1,4 +1,4 @@
-<?
+<?php
 	session_start();
 	include_once("_global.php");
 	unset($_SESSION);

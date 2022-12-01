@@ -1,4 +1,4 @@
-<?//------------------------------------------------------------------
+<?php //------------------------------------------------------------------
 define( 'BASE' , dirname( __FILE__ ) . '/../..');
 include_once(  BASE . '/_global.php' );
 
@@ -120,7 +120,7 @@ $sDiv = '
 </div>
 <div id="footer">
 	<p class="copyright">
-		Copyright &copy; 2011</p>
+		Copyright &copy; 2022</p>
 </div>';
 
 

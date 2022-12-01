@@ -33,7 +33,7 @@
 <script  src="../includes/grillas/dhtmlxMenu/sources/dhtmlxcommon.js"></script>
 <script  src="../includes/grillas/dhtmlxMenu/sources/dhtmlxmenu.js"></script>
 
-<!-- datos para pestañas-->
+<!-- datos para pestaï¿½as-->
 <link rel="stylesheet" type="text/css" href="../includes/grillas/dhtmlxTabbar/sources/dhtmlxtabbar.css">
 <script  src="../includes/grillas/dhtmlxTabbar/sources/dhtmlxcommon.js"></script>
 <script  src="../includes/grillas/dhtmlxTabbar/sources/dhtmlxtabbar.js"></script>
@@ -81,7 +81,7 @@
 <link rel="STYLESHEET" type="text/css" href="../includes/grillas/dhtmlxCalendar/codebase/skins/dhtmlxcalendar_dhx_blue.css">
 <script  src="../includes/grillas/dhtmlxCalendar/codebase/dhtmlxcommon.js"></script>
 <script  src="../includes/grillas/dhtmlxCalendar/codebase/dhtmlxcalendar.js"></script>
-<link rel="STYLESHEET" type="text/css" href="../includes/grillas/dhtmlxGrid/ext/dhtmlxgrid_pgn_bricks.css">
+<!--<link rel="STYLESHEET" type="text/css" href="../includes/grillas/dhtmlxGrid/ext/dhtmlxgrid_pgn_bricks.css">-->
 <script  src="../includes/grillas/dhtmlxGrid/ext/dhtmlxgrid_pgn.js"></script>
 
 </head>

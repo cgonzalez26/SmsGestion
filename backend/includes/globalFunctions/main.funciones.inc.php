@@ -1,4 +1,4 @@
-<?
+<?php
 function xhtmlTablaSearchVehiculosSitio($aVariables = array()){
 	return parserTemplate( TEMPLATES_XHTML_DIR . "/searchForms/vehiculos.tpl", $aVariables);
 }
@@ -56,7 +56,7 @@ function xhtmlFootPagina($aVaribales = array()){
 //-------------------------------------------
 
 function  xhtmlFormRequestPassword($aVariables){
-	return parserTemplate( TEMPLATES_XHTML_DIR . "/pages/RecordarContraseña.tpl", $aVariables);
+	return parserTemplate( TEMPLATES_XHTML_DIR . "/pages/RecordarContraseï¿½a.tpl", $aVariables);
 }
 
 //-------------------------------------------
@@ -105,7 +105,7 @@ function getParametrosBasicos($Level){
 	$arrayVariables['ARCHIVE_CSS'] = $archiveStyle;
 	$arrayVariables['CSS_DIR'] = $BaseUrl;
 	$arrayVariables['JS_DIR'] = $BaseUrl;
-	$arrayVariables['TEMPLATE_DIR'] = TEMPLATE_DIR;
+	$arrayVariables['TEMPLATE_DIR'] = TEMPLATES_DIR;
 	$arrayVariables['TEMPLATES_XHTML_DIR'] = TEMPLATES_XHTML_DIR;
 	$arrayVariables['XHTML_TITLE'] = "SMSGestion";
 	
@@ -151,7 +151,7 @@ function arrayToOptions( $array ,$selected = null ){
 }
 
 function array_2_options( $array, $seleccionado = '' ) {
-	
+	$cadena = "";
 	
 	If( !is_array( $array ) ) return;
 	
@@ -160,7 +160,7 @@ function array_2_options( $array, $seleccionado = '' ) {
 	
 		// Si es un array el elemento actual, entonces
 		// debemos crear un grupo de opciones <optgroup...,
-		// y pasamos a la misma función el array para
+		// y pasamos a la misma funciï¿½n el array para
 		// obtener las opciones <options.. del subarray
 		
 		If( is_array( $texto ) )
@@ -297,18 +297,18 @@ function isLogin(){
 
 function ObtenerNavegador($user_agent) {
      $navegadores = array(
-          'Opera' => 'Opera',
-          'Mozilla Firefox'=> '(Firebird)|(Firefox)',
-          'Galeon' => 'Galeon',
-          'Mozilla'=>'Gecko',
-          'MyIE'=>'MyIE',
-          'Lynx' => 'Lynx',
-          'Netscape' => '(Mozilla/4\.75)|(Netscape6)|(Mozilla/4\.08)|(Mozilla/4\.5)|(Mozilla/4\.6)|(Mozilla/4\.79)',
-          'Konqueror'=>'Konqueror',
-          'Internet Explorer' => 'MSIE',
+          'Opera' => '/Opera/',
+          'Mozilla Firefox'=> '/(Firebird)|(Firefox)/',
+          'Galeon' => '/Galeon/',
+          'Mozilla'=>'/Gecko/',
+          'MyIE'=>'/MyIE/',
+          'Lynx' => '/Lynx/',
+          'Netscape' => '/(Mozilla/4\.75)|(Netscape6)|(Mozilla/4\.08)|(Mozilla/4\.5)|(Mozilla/4\.6)|(Mozilla/4\.79)/',
+          'Konqueror'=>'/Konqueror/',
+          'Internet Explorer' => '/MSIE/',
 );
 	foreach($navegadores as $navegador=>$pattern){
-	       if (eregi($pattern, $user_agent))
+	       if (preg_match($pattern, $user_agent))
 	       return $navegador;
 	    }
 	return 'Desconocido';
@@ -756,7 +756,6 @@ function getIdProducto($sCodigo){
 		$aParametros["MOSTRAR_MENU_SMS"] = "style='display:none'";
 		$aParametros["MOSTRAR_MENU_MAIL"] = "style='display:none'";
 		$aParametros["MOSTRAR_MENU_CONFIGURACION"] = "style='display:none'";
-
 		if(array_key_exists(1,$_SESSION['PERMISOS']))//Usuarios
 			$aParametros["MOSTRAR_MENU_USUARIOS"] = "style='display:inline'";
 		if(array_key_exists(2,$_SESSION['PERMISOS']))//Contactos
@@ -771,7 +770,6 @@ function getIdProducto($sCodigo){
 			$aParametros["MOSTRAR_MENU_MAIL"] = "style='display:inline'";
 		if(array_key_exists(7,$_SESSION['PERMISOS']))//Mensajes Mail		
 			$aParametros["MOSTRAR_MENU_CONFIGURACION"] = "style='display:inline'";
-			
 		if($iNivel == 0)	
 			$sMenu = parserTemplate( TEMPLATES_XHTML_DIR . "/blocks/userMenu.tpl", $aParametros);
 		else

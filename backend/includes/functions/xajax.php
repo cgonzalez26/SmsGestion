@@ -1,4 +1,4 @@
-<?
+<?php
 
 //--------------------------------------------------------------------------------------------------------------
 
@@ -844,7 +844,7 @@ function updateDatosUser($aDatos){
 		$errores = '';
 		
 		if($form['sUser'] == "") $errores = 'El Nombre de Usuario no es valido';
-		else if($form['Pass'] == "") $errores = 'La contrase&ntilde;a no es válida';
+		else if($form['Pass'] == "") $errores = 'La contrase&ntilde;a no es vï¿½lida';
 		else {		
 		    
 			$nick = $oMysql->escaparCadena( $form['sUser'] );
@@ -852,7 +852,7 @@ function updateDatosUser($aDatos){
 			$datos = $oMysql->consultaSel("SELECT id,sPassword,sEstado FROM usuarios WHERE sLogin = '{$nick}'",true);		
 			if(!$datos) $errores = 'La Cuenta no existe';
 			
-			else if( $datos['sPassword'] != $pass ) $errores = 'La contraseña es incorrecta';
+			else if( $datos['sPassword'] != $pass ) $errores = 'La contraseï¿½a es incorrecta';
 				
 				else if($datos['sEstado'] != 'AUTORIZADO') $errores = 'Su Cuenta tiene conflicto. Contacte con el administrador';	
 			
@@ -1350,13 +1350,13 @@ function updateDatosUser($aDatos){
 			$mail = new PHPMailer(true); 
 			$mail->IsSMTP();
 			$mail->Mailer = "smtp";
-			//$mail->SMTPDebug  = 2;                     // Habilita información SMTP (opcional para pruebas) // 1 = errores y mensajes   // 2 = solo mensajes
-		  	$mail->SMTPAuth   = true;                  // Habilita la autenticación SMTP
+			//$mail->SMTPDebug  = 2;                     // Habilita informaciï¿½n SMTP (opcional para pruebas) // 1 = errores y mensajes   // 2 = solo mensajes
+		  	$mail->SMTPAuth   = true;                  // Habilita la autenticaciï¿½n SMTP
 		  	$mail->SMTPSecure = "ssl";                 // Establece el tipo de seguridad SMTP
 		  	$mail->Host       = "smtp.gmail.com";      // Establece Gmail como el servidor SMTP
 		  	$mail->Port       = 465;                   // Establece el puerto del servidor SMTP de Gmail
 		  	$mail->Username   = "crisgonzalez26@gmail.com";         // Usuario Gmail
-		  	$mail->Password   = "cucris2007";           // Contraseña Gmail
+		  	$mail->Password   = "cucris2007";           // Contraseï¿½a Gmail
 		  	$mail->IsHTML(true);
 		  	
 			$mail->From = $form['sFromMail']; 
@@ -1399,8 +1399,8 @@ function updateDatosUser($aDatos){
 			}
 		}
 		$sMsje = "";
-		if($form['hdnEnviar'] == 0){ //Si se desea solo Guardar la campaña sin enviar los mails
-			$sMsje .= "Se ha guardado correctamente la Campaña.\n";
+		if($form['hdnEnviar'] == 0){ //Si se desea solo Guardar la campaï¿½a sin enviar los mails
+			$sMsje .= "Se ha guardado correctamente la Campaï¿½a.\n";
 				
 		}else{
 			if(count($aMailError) == 0){
@@ -1500,13 +1500,13 @@ function updateDatosUser($aDatos){
 			$mail = new PHPMailer(true); 
 			$mail->IsSMTP();
 			$mail->Mailer = "smtp";
-			//$mail->SMTPDebug  = 2;                     // Habilita información SMTP (opcional para pruebas) // 1 = errores y mensajes   // 2 = solo mensajes
-		  	$mail->SMTPAuth   = true;                  // Habilita la autenticación SMTP
+			//$mail->SMTPDebug  = 2;                     // Habilita informaciï¿½n SMTP (opcional para pruebas) // 1 = errores y mensajes   // 2 = solo mensajes
+		  	$mail->SMTPAuth   = true;                  // Habilita la autenticaciï¿½n SMTP
 		  	$mail->SMTPSecure = "ssl";                 // Establece el tipo de seguridad SMTP
 		  	$mail->Host       = "smtp.gmail.com";      // Establece Gmail como el servidor SMTP
 		  	$mail->Port       = 465;                   // Establece el puerto del servidor SMTP de Gmail
 		  	$mail->Username   = "info@grivasoluciones.com.ar";         // Usuario Gmail
-		  	$mail->Password   = "superinfo";           // Contraseña Gmail
+		  	$mail->Password   = "superinfo";           // Contraseï¿½a Gmail
 		  	$mail->IsHTML(true);
 		  	
 		  	//$oRespuesta->alert($form['sFromMail']);
@@ -1556,7 +1556,7 @@ function updateDatosUser($aDatos){
 				}
 			}
 
-			if($form['hdnEnviar'] == 0){ //Si se desea solo Guardar la campaña sin enviar los mails
+			if($form['hdnEnviar'] == 0){ //Si se desea solo Guardar la campaï¿½a sin enviar los mails
 				$sMsje .= "Se ha guardado correctamente el E-mail Masivo.\n";				
 			}else{
 				if(count($aMailError) == 0){
@@ -1605,7 +1605,7 @@ function updateDatosUser($aDatos){
 			
 			$set = "idUsuario,idEstadoTrabajo,idUnidadNegocio,sRemitente,sTitulo,sMensaje,dFechaRegistro,sObservacion";			
 			$values = "'{$_SESSION['ID_USER']}',1,'{$form['idUnidadNegocio']}','{$form['sMailUnidadNegocio']}','{$form['sTitulo']}','{$form['sMensaje']}',NOW(),''";
-			//$ToAuditry = "Nueva Campañas de E-mail  ::: Usuario={$_SESSION['ID_USER']}";
+			//$ToAuditry = "Nueva Campaï¿½as de E-mail  ::: Usuario={$_SESSION['ID_USER']}";
 			//$idCampania = $oMysql->consultaSel("CALL usp_InsertTable(\"campanias\",\"$set\",\"$values\",\"{$_SESSION['ID_USER']}\",\"19\",\"$ToAuditry\");",true);	
 			//$idCampania = $oMysql->consultaSel("INSERT INTO campanias({$set}) VALUES({$values})",true);
 			$oMysql->consultaAff("INSERT INTO campanias({$set}) VALUES({$values})");
@@ -1613,7 +1613,7 @@ function updateDatosUser($aDatos){
 				
 			$setEstado = "idCampania,idUsuario,idEstadoTrabajo,dFechaRegistro";
 			$valuesEstado = "'{$idCampania}','{$_SESSION['ID_USER']}','1',NOW()";
-			$ToAuditoryEstado = "Insercion Historial de Trabajos ::: Usuario ={$_SESSION['ID_USER']} ::: Campaña={$idCampania} ::: estado=1";
+			$ToAuditoryEstado = "Insercion Historial de Trabajos ::: Usuario ={$_SESSION['ID_USER']} ::: Campaï¿½a={$idCampania} ::: estado=1";
 			$idHistorial = $oMysql->consultaSel("CALL usp_InsertTable(\"historialcampanias\",\"$setEstado\",\"$valuesEstado\",\"{$_SESSION['ID_USER']}\",\"20\",\"$ToAuditoryEstado\");",true);
 			
 			//$array['Subject'] = convertir_especiales_html($form['sAsunto']);
@@ -1674,7 +1674,7 @@ function updateDatosUser($aDatos){
 			$derror = "El mensaje ha sido enviado.";
 			$setEstado = "idCampania,idUsuario,idEstadoTrabajo,dFechaRegistro";
 			$valuesEstado = "'{$idCampania}','{$_SESSION['ID_USER']}','{$idEstadoTrabajo}',NOW()";
-			$ToAuditoryEstado = "Insercion Historial de Campañas ::: Usuario ={$_SESSION['ID_USER']} ::: Campania={$form["idCampania"]} ::: estado={$idEstadoTrabajo}";
+			$ToAuditoryEstado = "Insercion Historial de Campaï¿½as ::: Usuario ={$_SESSION['ID_USER']} ::: Campania={$form["idCampania"]} ::: estado={$idEstadoTrabajo}";
 			$idHistorial = $oMysql->consultaSel("CALL usp_InsertTable(\"historialcampanias\",\"$setEstado\",\"$valuesEstado\",\"{$_SESSION['ID_USER']}\",\"14\",\"$ToAuditoryEstado\");",true);
 			
 		}else{
@@ -1732,13 +1732,13 @@ function updateDatosUser($aDatos){
 			$mail = new PHPMailer(true); 
 			$mail->IsSMTP();
 			$mail->Mailer = "smtp";
-			//$mail->SMTPDebug  = 2;                     // Habilita información SMTP (opcional para pruebas) // 1 = errores y mensajes   // 2 = solo mensajes
-		  	$mail->SMTPAuth   = true;                  // Habilita la autenticación SMTP
+			//$mail->SMTPDebug  = 2;                     // Habilita informaciï¿½n SMTP (opcional para pruebas) // 1 = errores y mensajes   // 2 = solo mensajes
+		  	$mail->SMTPAuth   = true;                  // Habilita la autenticaciï¿½n SMTP
 		  	$mail->SMTPSecure = "ssl";                 // Establece el tipo de seguridad SMTP
 		  	$mail->Host       = "smtp.gmail.com";      // Establece Gmail como el servidor SMTP
 		  	$mail->Port       = 465;                   // Establece el puerto del servidor SMTP de Gmail
 		  	$mail->Username   = "info@grivasoluciones.com.ar";         // Usuario Gmail
-		  	$mail->Password   = "superinfo";           // Contraseña Gmail
+		  	$mail->Password   = "superinfo";           // Contraseï¿½a Gmail
 		  	$mail->IsHTML(true);
 		  	
 			$mail->From = $form['sFromMail']; 
@@ -1798,8 +1798,8 @@ function updateDatosUser($aDatos){
 			}
 			
 			$idEstadoMail = 0;
-			if($form['hdnEnviar'] == 0){ //Si se desea solo Guardar la campaña sin enviar los mails
-				$sMsje .= "Se ha guardado correctamente la Campaña.\n";
+			if($form['hdnEnviar'] == 0){ //Si se desea solo Guardar la campaï¿½a sin enviar los mails
+				$sMsje .= "Se ha guardado correctamente la Campaï¿½a.\n";
 				
 			}else{
 				$sMsje .= "Se han enviado {$iCantidadEnviados} Mails.\n";

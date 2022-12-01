@@ -14,7 +14,7 @@
 	@package xajax
 	@version $Id: xajaxFunctionPlugin.inc.php 362 2007-05-29 15:32:24Z calltoconstruct $
 	@copyright Copyright (c) 2005-2007 by Jared White & J. Max Wilson
-	@copyright Copyright (c) 2008-2009 by Joseph Woolley, Steffen Konerow, Jared White  & J. Max Wilson
+	@copyright Copyright (c) 2008-2010 by Joseph Woolley, Steffen Konerow, Jared White  & J. Max Wilson
 	@license http://www.xajaxproject.org/bsd_license.txt BSD License
 */
 
@@ -129,23 +129,39 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 
 			if (XAJAX_FUNCTION == $sType)
 			{
-				$xuf =& $aArgs[1];
+				$xuf = $aArgs[1];
 
-				if (false === is_a($xuf, 'xajaxUserFunction'))
-					$xuf =& new xajaxUserFunction($xuf);
+				if (false === ($xuf instanceof xajaxUserFunction))
+					$xuf = new xajaxUserFunction($xuf);
 
 				if (2 < count($aArgs))
+				{
 					if (is_array($aArgs[2]))
+					{
 						foreach ($aArgs[2] as $sName => $sValue)
+						{
 							$xuf->configure($sName, $sValue);
-
-				$this->aFunctions[] =& $xuf;
+						}
+					} else {
+						$xuf->configure('include', $aArgs[2]);
+					}
+				}
+				$this->aFunctions[] = $xuf;
 
 				return $xuf->generateRequest($this->sXajaxPrefix);
 			}
 		}
 
 		return false;
+	}
+
+
+	function generateHash()
+	{
+		$sHash = '';
+		foreach (array_keys($this->aFunctions) as $sKey)
+			$sHash .= $this->aFunctions[$sKey]->getName();
+		return md5($sHash);
 	}
 
 	/*
@@ -158,19 +174,10 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 	*/
 	function generateClientScript()
 	{
-		if (false === $this->bDeferScriptGeneration || 'deferred' === $this->bDeferScriptGeneration)
+		if (0 < count($this->aFunctions))
 		{
-			if (0 < count($this->aFunctions))
-			{
-				echo "\n<script type='text/javascript' " . $this->sDefer . "charset='UTF-8'>\n";
-				echo "/* <![CDATA[ */\n";
-
-				foreach (array_keys($this->aFunctions) as $sKey)
-					$this->aFunctions[$sKey]->generateClientScript($this->sXajaxPrefix);
-
-				echo "/* ]]> */\n";
-				echo "</script>\n";
-			}
+			foreach (array_keys($this->aFunctions) as $sKey)
+				$this->aFunctions[$sKey]->generateClientScript($this->sXajaxPrefix);
 		}
 	}
 
@@ -209,12 +216,12 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 		if (NULL == $this->sRequestedFunction)
 			return false;
 
-		$objArgumentManager =& xajaxArgumentManager::getInstance();
+		$objArgumentManager = xajaxArgumentManager::getInstance();
 		$aArgs = $objArgumentManager->process();
 
 		foreach (array_keys($this->aFunctions) as $sKey)
 		{
-			$xuf =& $this->aFunctions[$sKey];
+			$xuf = $this->aFunctions[$sKey];
 
 			if ($xuf->getName() == $this->sRequestedFunction)
 			{
@@ -227,5 +234,5 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 	}
 }
 
-$objPluginManager =& xajaxPluginManager::getInstance();
+$objPluginManager = xajaxPluginManager::getInstance();
 $objPluginManager->registerPlugin(new xajaxFunctionPlugin(), 100);

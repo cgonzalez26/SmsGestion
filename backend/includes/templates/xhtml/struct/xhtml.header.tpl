@@ -60,8 +60,9 @@
 		<link href="{JS_DIR}/js/windows_js_1.3/themes/nuncio.css" rel="stylesheet" type="text/css" >	 </link>
 		
 		<script type='text/javascript' src='{JS_DIR}/js/teclado.js'></script>	
+		
 		-->
-		{OTROS_HEADER}
+		
 		<link type="image/png" href="{CSS_DIR}/images/sms.png" rel="shortcut icon" sizes="32x32">
 		<script>
 			 jQuery.noConflict();

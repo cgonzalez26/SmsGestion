@@ -1,7 +1,7 @@
 <?php //------------------------------------------------------------------
 
 // -----------------------------------------------------------------------
-// Clase Genérica, Abstracta para conexión al Servidor MySQL
+// Clase Genï¿½rica, Abstracta para conexiï¿½n al Servidor MySQL
 // -----------------------------------------------------------------------
 
 $GLOBALS['MYSQL_CONEXION_ID'] = false;
@@ -19,8 +19,8 @@ class mysql2 {
 		
 		//extract( include( dirname(__FILE__) . '/../../../MySQL.inc.php' ) );
 		$host='localhost';
-		$user='Desarrollo';
-		$pass='d3sarr0ll0';
+		$user='root';
+		$pass='';
 		//$bd='shell';
 		$bd='SMSGestion';
 				
@@ -36,13 +36,13 @@ class mysql2 {
 	}
 	
 	
-	// Método para enviar una consulta genérica al servidor
+	// Mï¿½todo para enviar una consulta genï¿½rica al servidor
 	// Opcionalmente, podemos indicar que no esperamos resultados,
-	// de esta forma la consulta se efectúa mucho más rapido
+	// de esta forma la consulta se efectï¿½a mucho mï¿½s rapido
 	
 	final protected function consultaGenerica( $consultaSQL ) {
 		
-		// Si no estamos conectados, entonces llamamos al método 'conectar',
+		// Si no estamos conectados, entonces llamamos al mï¿½todo 'conectar',
 		// sino, hacemos un ping con el servidor
 		
 		
@@ -52,9 +52,9 @@ class mysql2 {
 				
 			
 		// Obtenemos el identificador de resultado al realizar la consulta
-		// Luego, si ocurrió un error, obtenemos el mensaje de error y
-		// salimos. En caso de éxito, devolvemos el identificador
-		// de resultado (que será usado en otros métodos según el tipo
+		// Luego, si ocurriï¿½ un error, obtenemos el mensaje de error y
+		// salimos. En caso de ï¿½xito, devolvemos el identificador
+		// de resultado (que serï¿½ usado en otros mï¿½todos segï¿½n el tipo
 		// de consulta
 		
 		$res_id = mysqli_query( $GLOBALS['MYSQL_CONEXION_ID'], $consultaSQL );
@@ -96,10 +96,10 @@ class mysql2 {
 		{$this->sConsultaError}</pre>";
 	}
 	
-	// Método para realizar una consulta SELECT, DESCRIBE o SHOW.
-	// Los parámetros son usados para especificar cómo serán devueltos
-	// los resultados. Si es único el resultado, entonces
-	// sólo se devuelve una fila única, caso contrario
+	// Mï¿½todo para realizar una consulta SELECT, DESCRIBE o SHOW.
+	// Los parï¿½metros son usados para especificar cï¿½mo serï¿½n devueltos
+	// los resultados. Si es ï¿½nico el resultado, entonces
+	// sï¿½lo se devuelve una fila ï¿½nica, caso contrario
 	// se devuelve un array de filas (array de arrays). Si es necesario
 	// que las claves de los arrays sean un campo en particular, 
 	// y si se parsean los resutados (por ejemplo, convertir
@@ -113,14 +113,14 @@ class mysql2 {
 		
 											
 		// Obtenemos el identificador de consulta, mediante el 
-		// método anterior									
+		// mï¿½todo anterior									
 											
 		$res_id = $this->consultaGenerica( $consultaSQL );
 		
 		
-		// Si la operación no fue exitosa, o no existen resultados,
-		// si se esperaba un único resultado, devolvemos false, 
-		// sino un array vacío
+		// Si la operaciï¿½n no fue exitosa, o no existen resultados,
+		// si se esperaba un ï¿½nico resultado, devolvemos false, 
+		// sino un array vacï¿½o
 		
 		If( $res_id === false or mysqli_num_rows( $res_id ) == 0 ) 
 		return ( $unico ) ? false : array();
@@ -131,15 +131,16 @@ class mysql2 {
 		$cantidad_columnas = mysqli_num_fields( $res_id );
 		
 		
-		// Si se espera un único resultado, obtenemos sólo la primer
-		// fila, y de acuerdo al parámetro 'parse_filas', parseamos
-		// la fila obtenida. Si No se especificó una clave para 
+		// Si se espera un ï¿½nico resultado, obtenemos sï¿½lo la primer
+		// fila, y de acuerdo al parï¿½metro 'parse_filas', parseamos
+		// la fila obtenida. Si No se especificï¿½ una clave para 
 		// la fila, de acuerdo si existen varias columnas
 		// devolvemos el resultado
 		
 		If( $unico ) {
 			
-			$fila = mysqli_fetch_array( $res_id, MYSQL_ASSOC );
+			//$fila = mysqli_fetch_array( $res_id, MYSQL_ASSOC );
+			$fila = $res_id->fetch_array( $res_id );
 			
 			If( $parse_filas ) 
 			parse_str( http_build_query( $fila ), $fila );		
@@ -152,7 +153,7 @@ class mysql2 {
 		}
 			
 		
-		// Creamos un array vacío para ir ingresando en él las filas
+		// Creamos un array vacï¿½o para ir ingresando en ï¿½l las filas
 		// que se obtuvieron
 		
 		$filas = array();
@@ -160,8 +161,8 @@ class mysql2 {
 		
 		// Vamos obteniendo las filas del identificador de resultado
 		
-		While( $fila = mysqli_fetch_array( $res_id, MYSQL_ASSOC ) ) {
-			
+		//While( $fila = mysqli_fetch_array( $res_id, MYSQL_ASSOC ) ) {
+		While( $fila = mysqli_fetch_array( $res_id ) ) {	
 			
 			// Parseamos las filas
 						
@@ -170,10 +171,10 @@ class mysql2 {
 						
 			
 			
-			// Teniendo en cuenta si es una sóla columna o más, devolvemos
+			// Teniendo en cuenta si es una sï¿½la columna o mï¿½s, devolvemos
 			// un valor escalar o un array, respectivamente.
-			// Si no se especificó una clave, entonces agregamos directamente
-			// la fila en el array de filas, sin especificar un índice.
+			// Si no se especificï¿½ una clave, entonces agregamos directamente
+			// la fila en el array de filas, sin especificar un ï¿½ndice.
 					
 			If( $clave === false) 
 			$filas[] = ( ( $cantidad_columnas == 1 )? 
@@ -209,16 +210,16 @@ class mysql2 {
 	
 	
 	
-	// Método para realizar consultas UPDATE, DELETE, etc., donde se espera
-	// como resultado un número de filas afectadas
+	// Mï¿½todo para realizar consultas UPDATE, DELETE, etc., donde se espera
+	// como resultado un nï¿½mero de filas afectadas
 	
 	public function consultaAff( $consultaSQL ) {
 		
-		// Realizamos la consulta sin esperar ningún valor
+		// Realizamos la consulta sin esperar ningï¿½n valor
 		
 		If( false !== $this->consultaGenerica( $consultaSQL, false ) ) {
 			
-			// En caso de éxito, devolvemos las filas afectadas
+			// En caso de ï¿½xito, devolvemos las filas afectadas
 			
 			$afectados = mysqli_affected_rows( $GLOBALS['MYSQL_CONEXION_ID'] );
 
@@ -231,19 +232,19 @@ class mysql2 {
 
 
 	
-	// Método análogo al anterior, pero cuando se desea saber
-	// si una fila (generalmente única) fue afectada o no
+	// Mï¿½todo anï¿½logo al anterior, pero cuando se desea saber
+	// si una fila (generalmente ï¿½nica) fue afectada o no
 	
 	public function consultaBool( $consultaSQL ) {
 				
-		// Devolvemos el valor devuelto por el método anterior,
+		// Devolvemos el valor devuelto por el mï¿½todo anterior,
 		// pero en tipo binario
 		
 		return (boolean) $this->consultaAff( $consultaSQL );
 	}
 		
 	
-	// Método para desconectarse de Servidor y Base de datos
+	// Mï¿½todo para desconectarse de Servidor y Base de datos
 	
 	
 	
@@ -257,7 +258,7 @@ class mysql2 {
 		
 	
 	
-	// Método destructivo de la clase
+	// Mï¿½todo destructivo de la clase
 	
 	final public function __destruct() {
 		
@@ -266,8 +267,8 @@ class mysql2 {
 
 	
 	
-	// Método para comprobar la existencia de una fila en alguna tabla
-	// Para tal fin, se pasan como parámetros el nombre de la tabla,
+	// Mï¿½todo para comprobar la existencia de una fila en alguna tabla
+	// Para tal fin, se pasan como parï¿½metros el nombre de la tabla,
 	// el campo y el valor a comprobar
 	
 	public function comprobarExistencia( $tabla, $campo, $valor, $condiciones_extra = '' ) {
@@ -279,15 +280,15 @@ class mysql2 {
 	}
 			
 	
-	// Método para escapar cadenas, para que sea seguro insertarlas
-	// en tablas MySQL. El parámetro cadenas es pasado por valor, 
+	// Mï¿½todo para escapar cadenas, para que sea seguro insertarlas
+	// en tablas MySQL. El parï¿½metro cadenas es pasado por valor, 
 	// y puede ser un valor escalar o un array.
 	
 	public function escaparCadena( &$cadenas ) {
 		
 		
 		// Si es un array, iteramos recursivamente
-		// llamándo nuevamente a la misma función
+		// llamï¿½ndo nuevamente a la misma funciï¿½n
 		// para escapar cada valor escalar
 		
 		If( is_array( $cadenas ) )
@@ -364,7 +365,7 @@ class mysql2 {
 	}
 	
 	
-	// El Parámetro $aIDsPadre debe ser un array de la forma ID_ELEMENTO_SELECT => CLAVE_SQL que representa
+	// El Parï¿½metro $aIDsPadre debe ser un array de la forma ID_ELEMENTO_SELECT => CLAVE_SQL que representa
 	
 	
 	public function getListaOpcionesCondicionadoMultiple( $aIDsPadre, $sIdHijo, $sTabla, $sClave, $sTexto, $sCondiciones = '', $bOptionInicial = true, $bDesactivar = false ) {  
@@ -436,7 +437,7 @@ class mysql2 {
 	
 	public function consultaMultiple( $consultaSQL ) {
 		
-		// Si no estamos conectados, entonces llamamos al método 'conectar',
+		// Si no estamos conectados, entonces llamamos al mï¿½todo 'conectar',
 		// sino, hacemos un ping con el servidor
 		
 		If( $GLOBALS['MYSQL_CONEXION_ID'] === false ) $this->conectar();
@@ -444,9 +445,9 @@ class mysql2 {
 				
 			
 		// Obtenemos el identificador de resultado al realizar la consulta
-		// Luego, si ocurrió un error, obtenemos el mensaje de error y
-		// salimos. En caso de éxito, devolvemos el identificador
-		// de resultado (que será usado en otros métodos según el tipo
+		// Luego, si ocurriï¿½ un error, obtenemos el mensaje de error y
+		// salimos. En caso de ï¿½xito, devolvemos el identificador
+		// de resultado (que serï¿½ usado en otros mï¿½todos segï¿½n el tipo
 		// de consulta
 		
 		$res = mysqli_multi_query( $GLOBALS['MYSQL_CONEXION_ID'], $consultaSQL );

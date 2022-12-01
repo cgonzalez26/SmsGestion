@@ -1,4 +1,4 @@
-<?
+<?php
 
 	function xhtmlFilterReportCar($aDatos){
 		global $oMysql;

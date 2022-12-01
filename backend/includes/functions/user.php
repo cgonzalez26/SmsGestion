@@ -1,4 +1,4 @@
-<?
+<?php
 function usuarioLogout( $redirect = null ) {
 	//unset($_SESSION);
 	//$_SESSION = array();			

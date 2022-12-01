@@ -1,4 +1,4 @@
-<?
+<?php
 final class User {
 	
 	public $id = 0;

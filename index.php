@@ -1,4 +1,5 @@
-<?//------------------------------------------------------------------
+<?php 
+//------------------------------------------------------------------
 include_once('_global.php');
 //echo phpinfo();exit();
 //$mysql = new MySQL();
@@ -6,7 +7,7 @@ include_once('_global.php');
 $aParametrosBasicos = getParametrosBasicos(0);
 $display_error = "style='display:none'";
 
-if($_POST['Confirmar']) {
+if(isset($_POST['Confirmar'])) {
 	//echo $_POST['Nick'].'---'.$_POST['Pass'];
 	/*if(!ereg(USER_NICK_FILTER, $_POST['Nick'])) $errores['Nick'] = 'El Nombre de Usuario no es v&aacute;lido';
 	else if(!ereg(USER_PASS_FILTER, $_POST['Pass'])) $errores['Pass'] = 'La contrase&ntilde;a no es v&aacute;lida';
@@ -17,8 +18,8 @@ if($_POST['Confirmar']) {
 	
 		$nick = $mysql->escapeString( $_POST['Nick'] );
 		$pass = md5( $mysql->escapeString( $_POST['Pass'] ) );
-	
-		$datos = $mysql->selectRow("SELECT id,sPassword,sEstado,sNombre FROM usuarios WHERE sLogin = '$nick'");				
+		
+		$datos = $mysql->selectRow("SELECT id,sPassword,sEstado,sNombre,idTipoUsuario FROM usuarios WHERE sLogin = '$nick'");				
 		
 		if(!$datos) $errores['Nick'] = 'La Cuenta no existe';
 		else if( $datos['sPassword'] != $pass ) $errores['Pass'] = 'La contrase&ntilde;a es incorrecta';
@@ -36,15 +37,17 @@ if($_POST['Confirmar']) {
 				$_SESSION['PERMISOS'] = $aPermisos;				
 				$_SESSION['ID_USER'] = $datos['id'];
 				$_SESSION['LOGIN'] = $nick;
+				$_SESSION['TYPE_USER'] = $datos['idTipoUsuario'];
 				
 				//echo $sPermisos;die();
-				go_url( '/backend/administrador/' );
+				go_url( '/backend/administrador/index.php' );
 			}
 		
 	//}
 	
 }
 
+$sErrores = "";
 if(!empty($errores)){
 	foreach ($errores as $error){
 		$sErrores = $error;
@@ -145,7 +148,7 @@ $sDiv = '
 </div>
 <div id="footer">
 	<p class="copyright">
-		Copyright &copy; 2011</p>
+		Copyright &copy; 2022</p>
 </div>
 ';
 

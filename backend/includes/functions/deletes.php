@@ -1,4 +1,4 @@
-<?
+<?php
 
 	function numProducts($idTipoProducto){
 		global $oMysql;

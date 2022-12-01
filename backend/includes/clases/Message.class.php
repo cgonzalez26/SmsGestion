@@ -1,4 +1,4 @@
-<?
+<?php
 
 #Clase que se encarga de Dar Formato a los mensaje de Salida tras la ejecucion de una operacion: ya sean alertas, fallos, cualqui
 

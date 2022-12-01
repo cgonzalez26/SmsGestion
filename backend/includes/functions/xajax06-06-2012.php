@@ -1,4 +1,4 @@
-<?
+<?php
 
 //--------------------------------------------------------------------------------------------------------------
 
@@ -1022,7 +1022,7 @@ function guardarDatosCuentaCorriente($array){
 		
 		$dFecha = dateFormatMysql(date("d/m/Y"));
 		$set= "sDescripcion,dFecha,fDebe,fHaber,sObservacion,dFechaRegistro,idUsuario,idUsuarioCtaCte,idTipoMovimiento,sEstado,idProforma";
-		$values = "'Comision Venta para NºProforma:{$form['hdnCodigo']}','{$dFecha}','$fDebe}','{$fHaber}','',NOW(),'{$_SESSION['ID_USER']}','{$form['hdnIdVendedor']}',3,'A','{$form['idPedido']}'";
+		$values = "'Comision Venta para Nï¿½Proforma:{$form['hdnCodigo']}','{$dFecha}','$fDebe}','{$fHaber}','',NOW(),'{$_SESSION['ID_USER']}','{$form['hdnIdVendedor']}',3,'A','{$form['idPedido']}'";
 	
 		$ToAuditory = "Se agrego movimiento de Cuenta Corriente al Vendedor id ::: {$form['hdnIdVendedor']}. Importe agregado  Haber:$fHaber-Debe:$fDebe";
 		$newId = $oMysql->consultaSel("CALL usp_InsertTable(\"cuentascorrientes\",\"$set\",\"$values\",\"{$_SESSION['ID_USER']}\",\"0\",\"$ToAuditory\");",true);
@@ -1452,7 +1452,7 @@ function guardarDatosCuentaCorriente($array){
 		$errores = '';
 		
 		if($form['sUser'] == "") $errores = 'El Nombre de Usuario no es valido';
-		else if($form['Pass'] == "") $errores = 'La contrase&ntilde;a no es válida';
+		else if($form['Pass'] == "") $errores = 'La contrase&ntilde;a no es vï¿½lida';
 		else {		
 		    
 			$nick = $oMysql->escaparCadena( $form['sUser'] );
@@ -1460,7 +1460,7 @@ function guardarDatosCuentaCorriente($array){
 			$datos = $oMysql->consultaSel("SELECT id,sPassword,sEstado FROM usuarios WHERE sLogin = '{$nick}'",true);		
 			if(!$datos) $errores = 'La Cuenta no existe';
 			
-			else if( $datos['sPassword'] != $pass ) $errores = 'La contraseña es incorrecta';
+			else if( $datos['sPassword'] != $pass ) $errores = 'La contraseï¿½a es incorrecta';
 				
 				else if($datos['sEstado'] != 'AUTORIZADO') $errores = 'Su Cuenta tiene conflicto. Contacte con el administrador';	
 			

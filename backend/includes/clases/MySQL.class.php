@@ -17,8 +17,8 @@ final class MySQL {
 
 	private static $defaultServerName = 'localhost';
 	private static $defaultServerPort = 3306;
-	private static $defaultServerLoginUser = 'Desarrollo';
-	private static $defaultServerLoginPass = 'd3sarr0ll0';
+	private static $defaultServerLoginUser = 'root';
+	private static $defaultServerLoginPass = '';
 	
 	
 	//private static $defaultDBName = 'shell';
@@ -653,7 +653,7 @@ final class MySQL {
 				$cadenas = htmlspecialchars( $cadenas, HTML_ENTITIES );
 			}
 			
-			$cadenas = mysql_escape_string( $cadenas ); 
+			//$cadenas = mysql_escape_string( $cadenas ); 
 		}
 	
 		return $cadenas;
@@ -694,7 +694,7 @@ final class MySQL {
 	}
 	
 	
-	// El Parámetro $aIDsPadre debe ser un array de la forma ID_ELEMENTO_SELECT => CLAVE_SQL que representa
+	// El Parï¿½metro $aIDsPadre debe ser un array de la forma ID_ELEMENTO_SELECT => CLAVE_SQL que representa
 	
 	
 	public function getListaOpcionesCondicionadoMultiple( $aIDsPadre, $sIdHijo, $sTabla, $sClave, $sTexto, $sCondiciones = '', $bOptionInicial = true, $bDesactivar = false ) {  

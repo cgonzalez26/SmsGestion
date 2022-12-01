@@ -1,4 +1,4 @@
-<?
+<?php
 
 //--------------------------------------------------------------------------------------------------------------
 
@@ -836,7 +836,7 @@ function updateDatosUser($aDatos){
 		$errores = '';
 		
 		if($form['sUser'] == "") $errores = 'El Nombre de Usuario no es valido';
-		else if($form['Pass'] == "") $errores = 'La contrase&ntilde;a no es válida';
+		else if($form['Pass'] == "") $errores = 'La contrase&ntilde;a no es vï¿½lida';
 		else {		
 		    
 			$nick = $oMysql->escaparCadena( $form['sUser'] );
@@ -844,7 +844,7 @@ function updateDatosUser($aDatos){
 			$datos = $oMysql->consultaSel("SELECT id,sPassword,sEstado FROM usuarios WHERE sLogin = '{$nick}'",true);		
 			if(!$datos) $errores = 'La Cuenta no existe';
 			
-			else if( $datos['sPassword'] != $pass ) $errores = 'La contraseña es incorrecta';
+			else if( $datos['sPassword'] != $pass ) $errores = 'La contraseï¿½a es incorrecta';
 				
 				else if($datos['sEstado'] != 'AUTORIZADO') $errores = 'Su Cuenta tiene conflicto. Contacte con el administrador';	
 			
@@ -1461,7 +1461,7 @@ function updateDatosUser($aDatos){
 			
 			$set = "idUsuario,idEstadoTrabajo,idUnidadNegocio,sRemitente,sTitulo,sMensaje,dFechaRegistro,sObservacion";			
 			$values = "'{$_SESSION['ID_USER']}',1,'{$form['idUnidadNegocio']}','{$form['sMailUnidadNegocio']}','{$form['sTitulo']}','{$form['sMensaje']}',NOW(),''";
-			//$ToAuditry = "Nueva Campañas de E-mail  ::: Usuario={$_SESSION['ID_USER']}";
+			//$ToAuditry = "Nueva Campaï¿½as de E-mail  ::: Usuario={$_SESSION['ID_USER']}";
 			//$idCampania = $oMysql->consultaSel("CALL usp_InsertTable(\"campanias\",\"$set\",\"$values\",\"{$_SESSION['ID_USER']}\",\"19\",\"$ToAuditry\");",true);	
 			//$idCampania = $oMysql->consultaSel("INSERT INTO campanias({$set}) VALUES({$values})",true);
 			$oMysql->consultaAff("INSERT INTO campanias({$set}) VALUES({$values})");
@@ -1469,7 +1469,7 @@ function updateDatosUser($aDatos){
 				
 			$setEstado = "idCampania,idUsuario,idEstadoTrabajo,dFechaRegistro";
 			$valuesEstado = "'{$idCampania}','{$_SESSION['ID_USER']}','1',NOW()";
-			$ToAuditoryEstado = "Insercion Historial de Trabajos ::: Usuario ={$_SESSION['ID_USER']} ::: Campaña={$idCampania} ::: estado=1";
+			$ToAuditoryEstado = "Insercion Historial de Trabajos ::: Usuario ={$_SESSION['ID_USER']} ::: Campaï¿½a={$idCampania} ::: estado=1";
 			$idHistorial = $oMysql->consultaSel("CALL usp_InsertTable(\"historialcampanias\",\"$setEstado\",\"$valuesEstado\",\"{$_SESSION['ID_USER']}\",\"20\",\"$ToAuditoryEstado\");",true);
 			
 			//$array['Subject'] = convertir_especiales_html($form['sAsunto']);
@@ -1530,7 +1530,7 @@ function updateDatosUser($aDatos){
 			$derror = "El mensaje ha sido enviado.";
 			$setEstado = "idCampania,idUsuario,idEstadoTrabajo,dFechaRegistro";
 			$valuesEstado = "'{$idCampania}','{$_SESSION['ID_USER']}','{$idEstadoTrabajo}',NOW()";
-			$ToAuditoryEstado = "Insercion Historial de Campañas ::: Usuario ={$_SESSION['ID_USER']} ::: Campania={$form["idCampania"]} ::: estado={$idEstadoTrabajo}";
+			$ToAuditoryEstado = "Insercion Historial de Campaï¿½as ::: Usuario ={$_SESSION['ID_USER']} ::: Campania={$form["idCampania"]} ::: estado={$idEstadoTrabajo}";
 			$idHistorial = $oMysql->consultaSel("CALL usp_InsertTable(\"historialcampanias\",\"$setEstado\",\"$valuesEstado\",\"{$_SESSION['ID_USER']}\",\"14\",\"$ToAuditoryEstado\");",true);
 			
 		}else{

@@ -19,7 +19,7 @@ define('COLOR_HEX_FUCCIA', 'FF00FF');
 
 
 //----------------------------------------
-@define('BASE_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/SmsGestion' );
+@define('BASE_URL', 'http://' . $_SERVER['SERVER_NAME'] . ':8080/SmsGestion' );
 
 define('BACKEND_DIR', dirname( __FILE__ ) . '/backend');
 

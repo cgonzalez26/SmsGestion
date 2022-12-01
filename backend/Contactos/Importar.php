@@ -76,5 +76,5 @@ Selecciona el archivo a importar:
 <input type="hidden" value="upload" name="action" />
 
 </form>
-<span><?=$sMsje; ?></span>
+<span><?php echo $sMsje; ?></span>
 </body>

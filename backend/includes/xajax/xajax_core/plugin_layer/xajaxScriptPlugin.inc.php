@@ -14,7 +14,7 @@
 	@package xajax
 	@version $Id: xajaxScriptPlugin.inc.php 362 2007-05-29 15:32:24Z calltoconstruct $
 	@copyright Copyright (c) 2005-2007 by Jared White & J. Max Wilson
-	@copyright Copyright (c) 2008-2009 by Joseph Woolley, Steffen Konerow, Jared White  & J. Max Wilson
+	@copyright Copyright (c) 2008-2010 by Joseph Woolley, Steffen Konerow, Jared White  & J. Max Wilson
 	@license http://www.xajaxproject.org/bsd_license.txt BSD License
 */
 
@@ -31,33 +31,35 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 	/*
 		String: sRequest
 	*/
-	var $sRequest;
+	private $sRequest;
 	
 	/*
 		String: sHash
 	*/
-	var $sHash;
+	private $sHash;
 	
 	/*
 		String: sRequestURI
 	*/
-	var $sRequestURI;
+	private $sRequestURI;
 	
 	/*
 		Boolean: bDeferScriptGeneration
 	*/
-	var $bDeferScriptGeneration;
+	private $bDeferScriptGeneration;
 	
 	/*
 		Boolean: bValidateHash
 	*/
-	var $bValidateHash;
+	private $bValidateHash;
 	
 	/*
 		Boolean: bWorking
 	*/
-	var $bWorking;
-	
+	private $bWorking;
+
+	private $sJavaScriptURI;
+
 	/*
 		Function: xajaxScriptPlugin
 		
@@ -77,7 +79,7 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 		$this->sRequest = '';
 		$this->sHash = null;
 		
-		if (isset($_GET['xjxGenerateJavascript'])) {
+/*		if (isset($_GET['xjxGenerateJavascript'])) {
 			$this->sRequest = 'script';
 			$this->sHash = $_GET['xjxGenerateJavascript'];
 		}
@@ -86,6 +88,7 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 			$this->sRequest = 'style';
 			$this->sHash = $_GET['xjxGenerateStyle'];
 		}
+		*/
 	}
 
 	/*
@@ -111,6 +114,9 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 		} else if ('deferScriptValidateHash' == $sName) {
 			if (true === $mValue || false === $mValue)
 				$this->bValidateHash = $mValue;
+		} else if ('javascript URI' == $sName) {
+			if (true === $mValue || false === $mValue)
+				$this->sJavaScriptURI = $mValue;
 		}
 	}
 	
@@ -126,41 +132,6 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 	*/
 	function generateClientScript()
 	{
-		if ($this->bWorking)
-			return;
-		
-		if (true === $this->bDeferScriptGeneration)
-		{
-			$this->bWorking = true;
-			
-			$sQueryBase = '?';
-			if (0 < strpos($this->sRequestURI, '?'))
-				$sQueryBase = '&';
-			
-			$aScripts = $this->_getSections('script');
-			if (0 < count($aScripts))
-			{
-//				echo "<!--" . print_r($aScripts, true) . "-->";
-			
-				$sHash = md5(implode($aScripts));
-				$sQuery = $sQueryBase . "xjxGenerateJavascript=" . $sHash;
-				
-				echo "\n<script type='text/javascript' src='" . $this->sRequestURI . $sQuery . "' charset='UTF-8'></script>\n";
-			}
-			
-			$aStyles = $this->_getSections('style');
-			if (0 < count($aStyles))
-			{
-//				echo "<!--" . print_r($aStyles, true) . "-->";
-			
-				$sHash = md5(implode($aStyles));
-				$sQuery = $sQueryBase . "xjxGenerateStyle=" . $sHash;
-				
-				echo "\n<link href='" . $this->sRequestURI . $sQuery . "' rel='Stylesheet' />\n";
-			}
-			
-			$this->bWorking = false;
-		}
 	}
 	
 	/*
@@ -172,12 +143,12 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 	*/
 	function canProcessRequest()
 	{
-		return ('' != $this->sRequest);
+		return false;
 	}
-	
-	function &_getSections($sType)
+	//todo: clean
+	function _getSections($sType)
 	{
-		$objPluginManager =& xajaxPluginManager::getInstance();
+	/*	$objPluginManager = xajaxPluginManager::getInstance();
 		
 		$objPluginManager->configure('deferScriptGeneration', 'deferred');
 		
@@ -209,10 +180,10 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 				}
 			}
 		}
-
+		var_dump($aSections);
 		$objPluginManager->configure('deferScriptGeneration', $this->bDeferScriptGeneration);
 		
-		return $aSections;
+		return $aSections;*/
 	}
 	
 	/*
@@ -228,7 +199,7 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 	{
 		if ($this->canProcessRequest())
 		{
-			$aSections =& $this->_getSections($this->sRequest);
+			$aSections = $this->_getSections($this->sRequest);
 			
 //			echo "<!--" . print_r($aSections, true) . "-->";
 			
@@ -240,12 +211,12 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 				if ('style' == $this->sRequest)
 					$sType = 'text/css';
 					
-				$objResponse =& new xajaxCustomResponse($sType);
+				$objResponse = new xajaxCustomResponse($sType);
 				
 				foreach ($aSections as $sSection)
 					$objResponse->append($sSection . "\n");
 				
-				$objResponseManager =& xajaxResponseManager::getInstance();
+				$objResponseManager = xajaxResponseManager::getInstance();
 				$objResponseManager->append($objResponse);
 				
 				header ('Expires: ' . gmdate('D, d M Y H:i:s', time() + (60*60*24)) . ' GMT');
@@ -262,5 +233,5 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 /*
 	Register the plugin with the xajax plugin manager.
 */
-$objPluginManager =& xajaxPluginManager::getInstance();
+$objPluginManager = xajaxPluginManager::getInstance();
 $objPluginManager->registerPlugin(new xajaxScriptPlugin(), 9999);

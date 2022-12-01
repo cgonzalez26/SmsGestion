@@ -1,4 +1,4 @@
-<?
+<?php
 final class Factura {
 	
 	public $id = 0;

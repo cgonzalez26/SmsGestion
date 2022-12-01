@@ -11,7 +11,7 @@
 	$aOpciones['ANCHO_GRILLA'] = '790';	
 	
 	$oXajax = new xajax();	
-	$oXajax->setCharEncoding('ISO-8859-1');
+	//$oXajax->setCharEncoding('ISO-8859-1');
 	$oXajax->configure('decodeUTF8Input',true);
 	$oXajax->register( XAJAX_FUNCTION , 'getDatosContacto');
 	$oXajax->register( XAJAX_FUNCTION , 'enviarSMSRapido');
@@ -63,7 +63,7 @@
 	</div>
 	<div id="footer">
 		<p class="copyright">
-			Copyright &copy; 2011</p>
+			Copyright &copy; 2022</p>
 	</div>';
 	
 	

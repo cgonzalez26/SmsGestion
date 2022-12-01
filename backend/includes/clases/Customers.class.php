@@ -1,4 +1,4 @@
-<?
+<?php
 final class Customer {
 	
 	public $id = 0;	
